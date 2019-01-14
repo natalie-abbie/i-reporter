@@ -22,6 +22,7 @@ loggedinuser = []
 def register():
     """
     User creates an account
+    User sign up details are added to the request_data base
     """
 
     try:
@@ -113,7 +114,8 @@ def get_users():
 @user.route('/api/v1/auth/login', methods=['POST'])
 def login():
     """
-    User login with correct credentials and token is generated 
+    User login with correct credentials
+    token is generated and given to a user
     """
 
     try:
@@ -146,7 +148,7 @@ def login():
                         if x['username'] == username and check_password_hash(x['password'], password):
                             loggedinuser.append([x['userid'], x['username']])
                             return jsonify({'token': token.decode('UTF-8'), 'message': 'logged in successfully'}), 200
-                            return jsonify({'message':'Logged in Successfully'}), 200
+                            # return jsonify({'message':'Logged in Successfully'}), 200
                         else:
                             return jsonify({'message': 'unauthorised access, invalid username or password'}), 400
 
@@ -160,17 +162,17 @@ def login():
 
             username = request_data['username']
             password = request_data['password']
-            token = jwt.encode({'user':username, 'exp':datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, SECRETKEY)
+            # token = jwt.encode({'user':username, 'exp':datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, SECRETKEY)
 
-            if loggedInUser[1] == username:
-                return jsonify({'message':'you are already logged in'}), 400 #bad request
+            # if loggedInUser[1] == username:
+            #     return jsonify({'message':'you are already logged in'}), 400 #bad request
 
             if USERS:
                 for x in USERS:
                     for k in x:
                         if x['username'] == username and check_password_hash(x['password'], password):
                             loggedinuser.append([x['userid'], x['username']])
-                            return jsonify({'token': token.decode('UTF-8'), 'message':'logged in successfully'}), 200
+                            # return jsonify({'token': token.decode('UTF-8'), 'message':'logged in successfully'}), 200
                             return jsonify({'message': 'logged in successfully'}), 200
                         else:
                             # bad request
@@ -227,7 +229,7 @@ def reset_password():
     return jsonify({'message': 'password reset was not successful'}), 400
 
 
-@user.route('/api/v1/auth/logout', methods=['POST'])
+@user.route('/api/v1/auth/resetpassword', methods=['POST'])
 def logout():
     global loggedinuser
     global USERS
