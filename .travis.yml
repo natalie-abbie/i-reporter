@@ -5,9 +5,10 @@ python:
 install:
   - pip install -r Requirements.txt
   - pip install coveralls
-# command to run tests
+
 script:
-   - nosetests tests.tests --with-coverage
-   - coverage report
+  - coverage run -m pytest
+  - coverage report
+  
 after_success: 
 - coveralls
