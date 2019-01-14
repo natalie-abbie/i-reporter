@@ -6,7 +6,7 @@ install:
   - pip install -r Requirements.txt
 # command to run tests
 script:
-  - python -m pytest --cov
+  -nosetests --with-coverage --cover-package=app && coverage html
 
 after_success: 
 - coveralls
