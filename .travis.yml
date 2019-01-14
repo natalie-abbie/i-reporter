@@ -1,4 +1,4 @@
-#language to use in tavis containers
+#language to use in travis containers
 language: python
 python:
     - "3.6"
@@ -8,6 +8,6 @@ install:
 # command to run tests
 script:
    - nosetests tests.tests --with-coverage
-  - coverage report
+   - coverage report
 after_success: 
 - coveralls
