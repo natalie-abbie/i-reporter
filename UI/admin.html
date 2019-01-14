@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>
+  Report Corruption
+  </title>
+  <link rel="stylesheet" href="./assets/css/main.css" />
+ 
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="navbar-logo">iReporter</a>
+      <button class="button-menu"><a class="button"></a></button>
+      <ul class="navbar-menu">
+          <li class="navbar-link"><a href="create-report.html">Create Record</a></li>
+          <li class="navbar-link"><a href="user.html">Profile</a></li>
+          <li class="navbar-link"><a href="profile.html">Update-Record</a></li>
+          <li class="navbar-link active"><a href="admin.html">Admin</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <main>
+    <section class="container">
+      <h2 class="form-title">Admin Dashboard</h2>
+      <div class="dashboard">
+        <div class="admin-table">
+          <table class="adminstatus">
+            <tbody>
+              <tr>
+              
+                <th>type</th>
+                <th>Description</th>
+                <th>Location</th>
+                <th>CreatedBy</th>
+                <th>CreatedOn</th>
+                <th>Record Status</th>
+              </tr>
+
+              <tr>
+                <td><strong>redflag</strong></td>
+                <td class="issue">Bribery</td>
+                <td>Bwaise</td>
+                <td>Natalie</td>
+                <td>18/Nov/2018</td>
+                
+                <td>
+                  <form action="">
+                    <button type="submit" class="btn btn-primary update-record">Accept</button>
+                    <select class="form-element" name="status" id="">
+                      <option value="Draft">Draft</option>
+                      <option value="investigation">investigation</option>
+                      <option value="resolved">Resolved</option>
+                      <option value="rejected">Rejected</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary update-record">Submit</button>
+                  </form>
+                </td>
+              </tr>
+
+              <tr>
+                <td><strong>redflag</strong></td>
+                <td class="issue">Emblezzing road funds</td>
+                <td>Nakasongola</td>
+                <td>Franklin</td>
+                <td>18/Nov/2018 </td>
+                
+                <td>
+                   <form action="">
+                    <button type="submit" class="btn btn-primary update-record">Accept</button>
+                    <select class="form-element" name="status" id="">
+                      <option value="Draft">Draft</option>
+                      <option value="investigation">investigation</option>
+                      <option value="resolved">Resolved</option>
+                      <option value="rejected">Rejected</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary update-record">Submit</button>
+                  </form>
+                </td>
+              </tr>
+
+              <tr>
+                <td><strong>redflag</strong>></td>
+                <td class="issue">collapsed bridges</td>
+                <td>1ganga</td>
+                <td> Igama</td>
+                <td>23/Nov/2018 </td>
+               
+                <td>
+                   <form action="">
+                    <button type="submit" class="btn btn-primary update-record">Accept</button>
+                    <select class="form-element" name="status" id="">
+                      <option value="Draft">Draft</option>
+                      <option value="investigation">investigation</option>
+                      <option value="resolved">Resolved</option>
+                      <option value="rejected">Rejected</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary update-record">Submit</button>
+                  </form>
+                </td>
+              </tr>           
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="admin-report">    
+        <div class="report-stat">
+          <span>redflag</span>
+          <p>3</p> 
+        </div>
+        <div class="report-stat">
+          <span>Intervention</span>
+          <p>5</p> 
+        </div>
+      </div>
+
+    </section>
+  </main>
+  <footer>
+    <p class="footer-edit">iReporter | Copyright &copy; 2018</p>
+  </footer>
+</body>
+
+</html>
