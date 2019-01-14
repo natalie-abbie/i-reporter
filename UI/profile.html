@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>
+  Report Corruption
+  </title>
+  <link rel="stylesheet" href="./assets/css/main.css" />
+ 
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="navbar-logo">iReporter</a>
+      <button class="button-menu"><a class="button"></a></button>
+      <ul class="navbar-menu">
+        <li class="navbar-link"><a href="login.html">Login</a></li>
+        <li class="navbar-link"><a href="signup.html">Sign Up</a></li>
+        <li class="navbar-link"><a href="create-report.html">Create Record</a></li>
+        <li class="navbar-link"><a href="user.html">Profile</a></li>
+        <li class="navbar-link"><a href="profile.html">Update-Record</a></li>
+        <li class="navbar-link active"><a href="admin.html">Admin</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="container">
+      <div class="profile">         
+        <div class="profile-table">
+          <table class="stats-table">
+            <tbody>
+              <tr>
+              
+                <th>type</th>
+                <th>Description</th>
+                <th>Location</th>
+                <th>CreatedOn</th>
+                <th>Status</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+              <tr>
+                <td><strong>redflag</strong></td>
+                <td class="issue">Bribery</td>
+                <td>Bwaise</td>
+                <td>18/Nov/2018</td>
+                <td>Draft</td>
+                <td><a href="./edit-report.html" class="btn">Edit</a></td>
+                <td><button class="btn btn-warning delete-report">Delete</button></td>
+              </tr>
+
+              <tr>
+                <td><strong>redflag</strong></td>
+                <td class="issue">Emblezzing road funds</td>
+                <td>Nakasongola</td>
+                <td>18/Nov/2018 </td>
+                <td>Draft</td>
+                <td><a href="./edit-report.html" class="btn">Edit</a></td>
+                <td><button class="btn btn-warning delete-report">Delete</button></td>
+              </tr>
+
+              <tr>
+                <td><strong>redflag</strong>></td>
+                <td class="issue">collapsed bridges</td>
+                <td>1ganga</td>
+                <td> Igama</td>
+                <td>Draft</td>
+                <td><a href="./edit-report.html" class="btn">Edit</a></td>
+                <td><button class="btn btn-warning delete-report">Delete</button></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="action">
+        <div class="action-header">
+          <p class="action-title">Delete Report</p>
+          <span class="action-close">X</span>
+        </div>
+        <div class="action-body">
+          <p class="action-message">Are you sure you want to delete report?</p>
+          <div class="action-group">
+            <button class="btn action-btn" id="cancel">Cancel</button>
+            <button class="btn btn-warning action-btn" id="delete">Delete</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p class="footer-edit">iReporter | Copyright &copy; 2018</p>
+  </footer>
+</body>
+
+</html>
