@@ -1,0 +1,566 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "PT Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  background-color: #fffffa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: #3c4859;
+}
+
+body.action-open {
+  overflow: hidden;
+}
+
+/* form*/
+a {
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  border: none;
+  font-family: "PT Sans", sans-serif;
+  font-size: 1em;
+  margin: 0;
+  text-decoration: none;
+  text-align: center;
+  outline: none;
+}
+
+input,
+select,
+textarea {
+  height: 45px;
+  text-align: left;
+  border: 2px solid blue;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  padding: 0 10px;
+  background: transparent;
+}
+
+input[type="file"] {
+  padding-top: 8px;
+}
+
+textarea {
+  padding: 10px;
+  height: 90px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.btn {
+  padding: 12px 25px;
+  border-radius: 4px;
+  display: inline-block;
+  min-width: 110px;
+  text-align: center;
+}
+
+.btn-hollow {
+  border: 2px solid blue;
+  color: blue;
+}
+
+.btn-warning {
+  color: #fffffa;
+  background: #ef271b;
+}
+
+.btn{
+  background: blue;
+  color: #fffffa;
+}
+
+.form-style { 
+  width: 45%;
+  background: lightblue;
+  display: flex;
+  flex-direction: column;
+  padding: 50px 40px;
+  margin-top: 25px;
+}
+
+.container {
+  background: #0facf3;
+  padding: 50px 40px 130px;
+  position: relative;
+}
+
+.form-container > .form-title,
+.form-style{
+  align-self: center;
+  border-radius:20px;
+}
+
+label {
+  margin-bottom: 2px;
+  font-weight: 600;
+}
+
+/* end of form styles */
+
+
+/* table styles */
+
+table {
+
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+tr {
+  border-left: 3px solid #0facf3;
+}
+
+td .form-element {
+  margin-bottom: 0;
+}
+
+td,
+th {
+  padding: 20px 10px;
+}
+/* end of table styles */
+
+/* Navigation */
+header {
+  box-shadow: rgba(31, 53, 78, 0.11) 0 1px;
+}
+
+.button-menu {
+  display: none;
+}
+
+.navbar {
+  display: flex;
+  background-color: blue;
+}
+
+.navbar-logo {
+  font-weight: 600;
+  font-size: 2em;
+  padding: 15px 40px;
+  text-decoration: underline;
+  color: white;
+  font-family:chiller;
+  letter-spacing: 0.07em;
+}
+
+.navbar-logo:hover{
+  background-color:maroon;
+  
+}
+
+.navbar-menu {
+  display: flex;
+  margin-left: auto;
+  padding: 0 40px;
+}
+
+.navbar-link {
+  display: inline;
+}
+
+.navbar-link a {
+  display: block;
+  padding: 26px 15px;
+  color: white;
+  font-family:chiller;
+  font-size:20px;
+}
+
+.navbar-link a:hover {
+  background-color: maroon;
+}
+/* end of nav */
+
+
+/* homepage Section */
+.homepage {
+  align-items: center;
+  background-color:#0facf3;
+  background-size: cover;
+  height: calc(100vh - 74px);
+  justify-content: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 90px;
+}
+
+.homepage-title,
+.homepage-paragraph {
+  margin-bottom: 40px;
+}
+
+.homepage-title {
+  font-size: 3em;
+  text-transform: uppercase;
+}
+
+.homepage-paragraph {
+  font-size: 1.5em;
+}
+
+.homepage-cta {
+  display: flex;
+  width: 26%;
+  justify-content: space-between;
+  background-color: white;
+  color:blue;
+}
+
+section {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+section > .btn {
+  align-self: center;
+}
+
+/* end of homepage */
+
+/* images */
+img{
+  float:left;
+  margin:10px;
+  width:30%;
+}
+
+
+/* Footer */
+footer {
+  display: flex;
+  padding: 20px;
+  justify-content: center;
+  background-color: blue;
+}
+
+.footer-edit {
+  font-weight: 50%;
+  color:white;
+}
+
+
+
+/* actions */
+.action {
+  background: #fffffa;
+  position: absolute;
+  width: 520px;
+  padding: 10px 25px 20px;
+  bottom: 50%;
+  right: 50%;
+  transform: translate(50%, 50%);
+  z-index: -20;
+  opacity: 0;
+  transition: opacity .5s ease-in;
+}
+
+
+.action-title {
+  display: inline-block;
+}
+
+.action-header {
+  font-weight: 600;
+  font-size: 1.5em;
+  border-bottom: 2px solid #0facf3;
+  margin: 0 -25px;
+  padding: 10px 25px;
+}
+
+.action-body {
+  margin-top: 20px;
+}
+
+/* Reports Table */
+.adminstatus {
+  margin-top: 20px;
+  background: lightblue;
+}
+.stats-table {
+  margin-top: 20px;
+  background: lightblue;
+  width:100%;
+}
+
+
+.admin-table > .adminstatus {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.admin-report {
+  display: flex;
+  justify-content: space-between;
+  background: lightblue;
+  padding: 25px;
+  margin-top: 20px;
+  border-left: 3px solid #0facf3;
+  border-radius: 20px;
+}
+
+.report-stat {
+  text-align: center;
+}
+
+.report-stat > p {
+  font-size: 3em;
+}
+
+.report-stat > span {
+  font-weight: 600;
+}
+
+td .report-user {
+  font-size: 1em;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+tr{
+  text-align:left
+}
+/* 
+tr > td:nth-child(4),
+tr > td:nth-child(5) {
+  text-align: center;
+} */
+/* 
+tr > td:last-child {
+  text-align: center;
+} */
+
+/* User reports */
+.user-reports {
+  flex-basis: 73%;
+}
+
+.user-reports > .featured-cards {
+  justify-content: flex-start;
+}
+
+.user-reports .report-card {
+  flex-basis: 30%;
+  margin-right: 20px;
+}
+
+.report-img {
+  width: 200px;
+  height: auto;
+}
+
+/* For smartphones (<768px) */
+@media screen and (max-width: 768px) {
+  .navbar-menu {
+    flex-direction: column;
+    position: absolute;
+    max-height: 0;
+    top: 73px;
+    left: 0;
+    right: 0;
+    padding: 0;
+    width: 100%;
+    background: #0facf3;
+    overflow: hidden;
+    transition: all 250ms ease-in;
+    z-index: 1000;
+  }
+
+  .navbar-menu.menu-open {
+    max-height: 380px;
+  }
+
+  .navbar-link a {
+    color: #fffffa;
+    padding: 20px;
+  }
+
+  .active a {
+    color: #0facf3;
+    background: #fffffa;
+  }
+
+  .button-menu {
+    position: absolute;
+    padding: 37px;
+    right: 0;
+    background: transparent;
+    display: block;
+  }
+
+  .button-menu.menu-open > .button {
+    background: transparent;
+  }
+
+  .button-menu.menu-open > .button::after,
+  .button-menu.menu-open > .button::before {
+    top: 0;
+    width: 30px;
+  }
+
+  .button-menu.menu-open > .button::after {
+    transform: rotate(-45deg);
+  }
+
+  .button-menu.menu-open > .button::before {
+    transform: rotate(45deg);
+  }
+
+  .button {
+    top: 36px;
+    height: 2px;
+    background: #0facf3;
+    display: block;
+    position: absolute;
+    width: 30px;
+    right: 20px;
+  }
+
+  .button::before {
+    top: 7px;
+  }
+
+  .button::after {
+    bottom: 7px;
+  }
+
+  .button::before,
+  .button::after {
+    content: "";
+    height: 2px;
+    background: #0facf3;
+    display: block;
+    position: absolute;
+    width: 30px;
+    right: 0px;
+    transition: all 250ms ease-in;
+  }
+
+  .container {
+    padding: 40px 20px;
+  }
+
+  .form-container {
+    padding: 40px 0 65px;
+  }
+
+  .homepage {
+    padding: 40px 25px;
+    height: auto;
+  }
+
+  .homepage-title {
+    font-size: 2em;
+    margin-bottom: 25px;
+    text-align: center;
+  }
+
+  .homepage-paragraph {
+    font-size: 1.3em;
+  }
+
+
+  .homepage-cta > a:first-child {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .featured-cards,
+  .profile {
+    flex-direction: column;
+  }
+
+  section {
+    padding: 40px 20px;
+  }
+
+  .navbar-logo {
+    font-size: 1.5em;
+    padding: 20px;
+  }
+
+  .featured {
+    margin-top: -40px;
+    clip-path: polygon(0 8%, 100% 0, 100% 100%, 0% 100%);
+    padding-top: 150px;
+  }
+
+  .report-card:last-child {
+    margin-bottom: 0;
+  }
+
+  .form-style {
+    width: 90%;
+    padding: 50px 25px;
+  }
+
+  .profile-card {
+    width: 100%;
+  }
+
+  .profile-table,
+  .admin-table {
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  td .report-user {
+    text-align: left;
+  }
+
+  td .form-element {
+    margin-bottom: 15px;
+  }
+
+  .user-reports > .featured-cards > .report-card {
+    margin-right: 0;
+  }
+
+  .action {
+    width: 90%;
+    padding: 10px 15px 20px;
+  }
+
+  .action-header {
+    padding: 10px 25px;
+    margin: 0 -15px;
+  }
+
+  .action-images {
+    display: block;
+  }
+
+  .admin-report {
+    flex-direction: column;
+  }
+
+  .report-stat {
+    margin-bottom: 15px;
+  }
+}
+
+/* Adjust container size for (width > 500 and width < 769px) */
+@media screen and (min-width: 500px) and (max-width: 768px) {
+  section {
+    padding: 20px 60px;
+  }
+}
+/* admin panel */
