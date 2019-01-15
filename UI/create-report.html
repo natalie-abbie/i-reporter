@@ -9,6 +9,7 @@
   Report Corruption
   </title>
   <link rel="stylesheet" href="./assets/css/main.css" />
+  <script src="./assets/js/locate.js"></script>
  
 </head>
 
@@ -39,16 +40,22 @@
           <option value="red-flag">Red Flag</option>
           <option value="intervention">Intervention</option>
         </select>
-        <label for="location">Enter Location </label>
-        <input type="text" class="form-element" name="location" id="location">
-        <label for="attachment">Upload media </label>
-        <input type="file" accept="image/*, video/mp4" id="attachment" name="attachment"
-          class="form-element" />
+        <label for="attachment">Add media</label>
+        <input type="file" accept="image/*, video/mp4" id="attachment"
+            name="attachment" class="form-element" />
           <label for="title">Description </label>
           <textarea name="title" id="title" class="form-element" placeholder="Enter a brief description"
             col="10" required></textarea>
+            <div class="locate">
+              <h1>Click to add your location</h1>
+              <button class="buttonclick">Get my location</button>
+              <div class="result"></div>
+            </div>
+
         <button type="submit" class="btn">Create Record</button>
+        
       </form>
+
     </section>
   </main>
   <footer>
