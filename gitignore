@@ -3,4 +3,3 @@ venv/*
 .cache
 *.pyc
 .vscode
-*.pyc
