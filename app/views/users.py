@@ -15,6 +15,8 @@ token = None
 
 loggedinuser = []
 
+specialChars = ['@', '#', '$', '%', '^', '&', '*', '!', '/', '?', '-', '_']
+
 # routes for the api
 
 
@@ -82,16 +84,40 @@ def register():
         else:
             password = request_data['password']
 
-         # check whether username has already been taken.
-        for x in USERS:
-            for v in x.items():
-                if v == username:
-                    # bad request
-                    return jsonify({'message': 'user already exists'}), 400
+        if len(request_data['username']) < 5:
+            return jsonify({'message':'username should be five characters and above'}), 400 #bad request
 
+        if len(request_data['password']) < 5:
+            return jsonify({'message':'password should be five characters and above'}), 400 #bad request
+         # check whether username has already been taken.
+        for x in username:
+            if x in specialChars:
+                return jsonify({'message':'username cannot contains special characters'}), 400 #bad request
+        
+       #check if the email contains a dot
+        if '.' not in request_data['email']:
+            return jsonify({'message':'email is invalid, dot missing'}), 400 #bad request
+
+        #check if the email contains an @ symbol
+        if '@' not in request_data['email']:
+            return jsonify({'message':'email is invalid, @ symbol missing'}), 400 #bad request
+        
+        #check whether username has already been taken.
+        for x in USERS:
+            for key, value in x.items():
+                if value == username:            
+                    return jsonify({'message':'user already exists'}), 400 #bad request
+    
         password = generate_password_hash(password)
-        USERS.append({"userid": str(uuid4()), "firstname":firstname,"lastname":lastname,"othernames":othernames, "username": username,
-                      "email": email, "password": password, "phonenumber":phonenumber,"registeredOn":str(datetime.datetime.now())})
+        USERS.append({"userid": str(uuid4()), 
+                    "firstname":firstname,
+                    "lastname":lastname,
+                    "othernames":othernames, 
+                    "username": username,
+                    "email": email,
+                    "password": password, 
+                    "phonenumber":phonenumber,
+                    "registeredOn":str(datetime.datetime.now())})
         # created
         return jsonify({"message": "Account created successfully", "users":USERS}), 201
 
@@ -148,7 +174,7 @@ def login():
                         if x['username'] == username and check_password_hash(x['password'], password):
                             loggedinuser.append([x['userid'], x['username']])
                             return jsonify({'token': token.decode('UTF-8'), 'message': 'logged in successfully'}), 200
-                            # return jsonify({'message':'Logged in Successfully'}), 200
+                        # return jsonify({'message':'Logged in Successfully'}), 200
                         else:
                             return jsonify({'message': 'unauthorised access, invalid username or password'}), 400
 
@@ -183,7 +209,7 @@ def login():
             return jsonify({"message": "Could not verify authetication"}), 401
 
         # unauthorised access
-        return make_response(jsonify({'message': 'couldn''t verify login'})), 401
+        return make_response(jsonify({'message': "couldn't verify login"})), 401
 
     except KeyError as item:
         return jsonify({'Error': str(item) + ' is missing'}), 400
@@ -215,15 +241,15 @@ def reset_password():
         return jsonify({"message": "please first login"}), 401
 
     # get username for current logged in user
-    for x in loggedinuser:
-        username = x[1]
+    for user in loggedinuser:
+        username = user[1]
 
     # lets only reset password for currently logged in user.
-    for x in USERS:
-        for k, v in x.items():
+    for user in USERS:
+        for k, v in user.items():
             if k == 'username':
                 if v == username:
-                    x['password'] = generate_password_hash(new_password)
+                    user['password'] = generate_password_hash(new_password)
                     return jsonify({'message': 'password was reset successfully'}), 200
 
     return jsonify({'message': 'password reset was not successful'}), 400

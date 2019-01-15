@@ -7,7 +7,7 @@ FLAGS = []  # global variable for redflags
 class User:
     """class for user registration"""
 
-    def __init__(self, user_id, firstname, lastname, othernames, username, email, phonenumber, password, isAdmin):
+    def __init__(self, user_id, firstname, lastname, othernames, username, email, phonenumber, password):
           # initialise the variables for this class here
         self.user_id = user_id
         self.firstname = firstname
@@ -17,11 +17,10 @@ class User:
         self.phonenumber = phonenumber
         self.email = email
         self.password = password
-        self.isAdmin = isAdmin
         self.registered_on = datetime.datetime.now()
         self.users_list = []
 
-    def register(self, user_id, firstname, lastname, othernames, username, email, phonenumber, password, isAdmin):
+    def register(self, user_id, firstname, lastname, othernames, username, email, phonenumber, password):
         """ creating a new user and returns a  true if a user has been
         successfully registered and false if otherwise."""
         oldUsersListLength = len(
@@ -32,9 +31,9 @@ class User:
                 for vals in user.values():
                     if user_id not in vals:
                         # create the list below with precise indexing as illustrated below
-                        # { user_id:[[0]= firstname, [1]= secondname, [2]=lastname,[3]othernames, [4] = username, [5] = phonenumber, [6] = email, [7] = password, [8] = isAdmin] }
+                        # { user_id:[[0]= firstname, [1]= secondname, [2]=lastname,[3]othernames, [4] = username, [5] = phonenumber, [6] = email, [7] = password, [8] ] }
                         self.users_list.append({user_id: [
-                                               firstname, lastname, othernames, username, phonenumber, email, password, isAdmin]})
+                                               firstname, lastname, othernames, username, phonenumber, email, password]})
                         if len(self.users_list) > oldUsersListLength:
                             # 'user added' # user was created successfully.
                             return True
@@ -42,11 +41,11 @@ class User:
                             return False  # user was not created.
                     else:
                         self.users_list.append({user_id: [
-                                               firstname, lastname, othernames, username, phonenumber, email, password, isAdmin]})
+                                               firstname, lastname, othernames, username, phonenumber, email, password]})
                         return True
         else:
             self.users_list.append({user_id: [
-                                   firstname, lastname, othernames, username, phonenumber, email, password, isAdmin]})
+                                   firstname, lastname, othernames, username, phonenumber, email, password]})
             return True
 
     def checkUsernameExists(self, username):
