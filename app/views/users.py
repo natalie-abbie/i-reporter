@@ -2,7 +2,7 @@ from flask import Blueprint, Flask, jsonify, json, request, make_response
 import re
 import datetime
 from app.models import User,USERS
-from flask import jwt
+import jwt
 from uuid import uuid4
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
