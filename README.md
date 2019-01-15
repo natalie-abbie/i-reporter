@@ -1,6 +1,9 @@
 # IReporter
 [![Maintainability](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability)](https://codeclimate.com/github/codeclimate/codeclimate/maintainability)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1ddead5772af47568e87415779bd8a58)](https://www.codacy.com/app/natalie-abbie/iReport?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=natalie-abbie/iReport&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b46278283303475bb1de7680bc048762)](https://www.codacy.com/app/natalie-abbie/i-reporter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=natalie-abbie/i-reporter&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.org/natalie-abbie/i-reporter.svg?branch=develop)](https://travis-ci.org/natalie-abbie/i-reporter)
+[![Coverage Status](https://coveralls.io/repos/github/natalie-abbie/i-reporter/badge.svg?branch=develop)](https://coveralls.io/github/natalie-abbie/i-reporter?branch=develop)
+
 
 The iReporter api enables users to register and login to the platform with their correct creditials inorder to report a redf flag or an intervention in line with corruption
 
