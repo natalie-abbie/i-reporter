@@ -6,4 +6,11 @@ omit =
     *venv/*
     */usr/*
     *.vscode/
+    app/__init__.py
+    app/models.py
+    app/views/__init__.py 
+    app/views/redflag.py
+    instance/__init__.py 
+    instance/config.py 
+    app/views/users.py
     
