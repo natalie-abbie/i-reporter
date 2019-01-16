@@ -238,9 +238,8 @@ section > .btn {
 
 /* images */
 img{
-  float:left;
-  margin:10px;
-  width:30%;
+  float:center;
+  width:80%;
 }
 
 
