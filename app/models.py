@@ -66,7 +66,7 @@ class User:
         else:
             print(availUsernames)
             return False
-  
+
 
 class Redflag:
     """
@@ -91,8 +91,8 @@ class Redflag:
         oldflagListLength = len(FLAGS)
         # create the list below with precise indexing as illustrated below
         # [0] = user_id, [1] = type, [2] = description, [3] = email, [4] = location, [5] =createdon [6] = created by
-        FLAGS.append({[self.flag_id,self.type, self.description,
-                                    self.location, self.createdOn]})
+        FLAGS.append({[self.flag_id, self.type, self.description,
+                       self.location, self.createdOn]})
 
         if len(FLAGS) > oldflagListLength:
             # incase creating a redflag is successful return true.
@@ -103,7 +103,7 @@ class Redflag:
 
     @staticmethod
     def get_specific_flag(flag_id):
-       
+
         global FLAGS
         if FLAGS:
             for x, y in enumerate(FLAGS, 0):

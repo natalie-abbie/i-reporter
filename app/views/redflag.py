@@ -70,9 +70,10 @@ def create_redflag():
 def get():
     """"Function that returns all registered flags"""
     global loggedinuser
+    global FLAGS
 
     if not loggedinuser:
-        return jsonify({'message': 'No records found'}), 404  # not found
+        return jsonify({'message': 'No records found','flags':FLAGS}), 404  # not found
     else:
         return jsonify({'flags': loggedinuser}), 200
 
@@ -149,17 +150,25 @@ def update1(flag_id):
 
 
 @flags.route("/api/v1/redflag/<flag_id>", methods=['DELETE'])
-def delete_flag(id):
+def delete_flag(flag_id):
     """Function is responsible for deleting a flag on parameter passed as id"""
     global loggedinuser
 
     for data in loggedinuser:
-        if flag_id == flag_id:
-            loggedinuser.remove(data)
-            return jsonify({'message': 'flag has been successfully deleted'}), 200
-        else:
-            # bad request
-                return jsonify({'message': 'No flag has that id, nothing was deleted'}), 400
-    else:
-        # not found
-        return jsonify({'message': 'no records of any flag exist'}), 404
+                if flag_id == flag_id: 
+                    loggedinuser.remove(data)            
+                    return jsonify({'message': 'flag has been successfully deleted'}), 200
+                else:
+                    # bad request
+                    return jsonify({'message': 'No flag has that id, nothing was deleted'}), 400
+
+# @flags.route("/api/v1/redflag/getlocation", methods=['GET'])
+# def location():
+#     url = 'https://maps.googleapis.com/maps/api/geocode/json'
+#     params = {'sensor': 'false', 'address': 'kampala,bwaise'}
+#     r = requests.get(url, params=params)
+#     results = r.json()['results']
+#     location = results[0]['geometry']['location']
+#     location['lat'], location['lng']
+    
+#     return jsonify({"message":"location created","details":location})

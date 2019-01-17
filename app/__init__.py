@@ -1,5 +1,6 @@
-from flask import Flask, json, jsonify, request, Blueprint
+"""registering blueprints"""
 import os
+from flask import Flask, json, jsonify, request, Blueprint
 from instance.config import configuration
 
 

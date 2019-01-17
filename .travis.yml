@@ -4,7 +4,6 @@ python:
     - "3.6"
 install:
   - pip install -r Requirements.txt
-  - pip install coveralls
 
 script:
   -  coverage run -m pytest
