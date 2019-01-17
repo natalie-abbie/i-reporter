@@ -30,19 +30,19 @@ Then when the virtual environmemt is created, Activate the environment
  In your Vscode you therefore get to realise its in brackets eg (venv)nataline.......... and when all this is done get to your application directorty if already pushed to github by cloning the repo 
  
  ```
- git clone https://github.com/natalie-abbie/iReport.git 
- cd to the application directory eg cd iReport
+ git clone https://github.com/natalie-abbie/i-report.git 
+ cd to the application directory eg cd i-report
  incase its in the branch git checkout branchname
  ```
  After all the dependences are installed in your virtualenv therefore run the command to put the depences in the in the requirements.txt file 
  ```
- pip install >requirements.txt 
+ pip install >Requirements.txt 
  and to install the dependences again run the below command in your terminal to install all the dependences
- pip install -r rewuirements.txt
+ pip install -r Requirements.txt
  ```
  Run the application with:
  ```
- python app/app.py
+ python run.py
  ```
 
 ## Running the tests
@@ -58,11 +58,12 @@ test_filename
 
 | URL Endpoint | HTTP Methods | Summary |
 | -------- | ------------- | --------- |
-| `api/v1/redflag/<flag_id>` | `GET` | Retrieves a specific redflag by id 
+| `api/v1/redflag/<flag_id>` | `GET` | Retrieves a specific redflag by id
+|`api/v1/redflag/create_redflag`|`POST`| creates redflag
 | `/api/v1/redflag'` | `GET` | Gets all the red flags created by the users
-| `api/v1/users` | `GET` | Retrieve all users |
-| `api/v1/register | `POST` |  registers a new User |
-| `api/v1/login` | `POST` |  Logs in a registered user |
+| `api/v1/getuser` | `GET` | Retrieve all users |
+| `api/v1/auth/register | `POST` |  registers a new User |
+| `api/v1/auth/login` | `POST` |  Logs in a registered user |
 | `api/v1/redflag/<flag_id>/location`|`PUT`| Changes the location of a specific  user
 | `api/v1/redflag/<flag_id>/description` | `PUT` | changes the description of a specific user |
 | `api/v1/redflag/<flag_id>`|`DELETE`| deletes the red of a specific user|
@@ -72,48 +73,56 @@ test_filename
 An example of how its posted in postman
 ```
 {
-     'user_id':uuid.uuid1(),
-      "firstname": "firstname",
-      "lastname": "lastname",
-      "othernames": "othernames",
-      "email": "email",
-      password": "password"
+    "firstname":"abio",
+    "lastname": "natalie",
+    "othernames": "talies",
+    "username": "natalyn",
+   "phonenumber":"0700000000",
+    "password": "nats123",
+    "email": "nats@gmail.com"
 }
 ```
+
+    "message": "Account created successfully",
+    "users": [
+        {
+            "email": "nats@gmail.com",
+            "firstname": "drats",
+            "lastname": "natalie",
+            "othernames": "talies",
+            "password": "pbkdf2:sha256:50000$c1VEQCYo$6afbf7610f70e51a99923db6ef46c9bef7dd10abbb0d7104c1128a31b675a612",
+            "phonenumber": "0700000000",
+            "registeredOn": "2019-01-17 04:29:16.721806",
+            "userid": "8e9348bb-5d53-418f-8bae-153d73f0e98a",
+            "username": "natalyn"
+        }
+    ]
 ### CREATE REDFLAGS
 An example of how its posted in postman
 ```
 {
-       "flag_id":uuid.uuid4(),
-        "location": "location",
-        "type": "type",
-        "description": "description",
-        "image": "image",
-        "video" : "video",
-        str(dt.utcnow()) : "created_on",
-        "created_by" : "created_by"
-       }
+    "location":"kyanja",
+    "type":"corruption",
+    "description":"emblezzing money for road construction"
+}
 ```
 ### RESULT IN POSTMAN 
 ```
 [
-    "'status': 201",
-    {
-        "data": [
-            {
-                "2018-12-21 23:39:04.922320": "Fri, 21 Dec 2018 23:39:04 GMT",
-                "created_by": "opio",
-                "description": "a mummy carried out child violence",
-                "flag_id": "bc0e0bdd-c01e-4d88-8d0c-75b4cf64b7b7",
-                "image": "image",
-                "location": "kisaasi",
-                "type": "violence",
-                "video": "video"
-            }
+      "flags": [
+        [
+            "dd83ff7e-88e3-44f1-a574-f8d270412231",
+            "natalyn"
         ],
-        "message": "redflag created"
-    }
-]
+        {
+            "description": "emblezzing money for road construction",
+            "flag_id": "f8e2b2f9-6715-4a0e-b28a-fbe0feb18d76",
+            "location": "kyanja",
+            "type": "corruption"
+        }
+    ],
+    "message": "flag successfully created"
+}
 ```
 
 ## Versioning
