@@ -1,11 +1,12 @@
-from flask import Blueprint, Flask, jsonify, json, request, make_response
-import re
+"""endpoints for user operations"""
 import datetime
-from app.models import User,USERS
-import jwt
 from uuid import uuid4
-from functools import wraps
+from flask import Blueprint, jsonify, request, make_response
+import jwt
 from werkzeug.security import generate_password_hash, check_password_hash
+from app.models import USERS
+
+
 
 
 user = Blueprint('users', __name__)
@@ -22,10 +23,7 @@ specialChars = ['@', '#', '$', '%', '^', '&', '*', '!', '/', '?', '-', '_']
 
 @user.route('/api/v1/auth/register', methods=['POST'])
 def register():
-    """
-    User creates an account
-    User sign up details are added to the request_data base
-    """
+    """ User creates an account.User sign up details are added to the request_data base"""
 
     try:
         global USERS
@@ -52,13 +50,13 @@ def register():
             firstname = request_data['firstname']
 
         if 'lastname' not in request_data.keys():
-            return jsonify({'Error': 'lastname missing'}), 
+            return jsonify({'Error': 'lastname missing'}), 400
         else:
             lastname = request_data['lastname']
 
         if 'othernames' not in request_data.keys():
-            return jsonify({'Error': 'field missing'}), 400   
-        else:
+            return jsonify({'Error': 'field missing'}), 400 
+        else:  
             othernames = request_data['othernames']      
 
         if len(request_data['phonenumber']) < 5:
@@ -90,10 +88,9 @@ def register():
         if len(request_data['password']) < 5:
             return jsonify({'message':'password should be five characters and above'}), 400 #bad request
          # check whether username has already been taken.
-        for x in username:
-            if x in specialChars:
+        for value in username:
+            if value in specialChars:
                 return jsonify({'message':'username cannot contains special characters'}), 400 #bad request
-        
        #check if the email contains a dot
         if '.' not in request_data['email']:
             return jsonify({'message':'email is invalid, dot missing'}), 400 #bad request
@@ -103,21 +100,21 @@ def register():
             return jsonify({'message':'email is invalid, @ symbol missing'}), 400 #bad request
         
         #check whether username has already been taken.
-        for x in USERS:
-            for key, value in x.items():
+        for data in USERS:
+            for value in data.items():
                 if value == username:            
                     return jsonify({'message':'user already exists'}), 400 #bad request
     
         password = generate_password_hash(password)
         USERS.append({"userid": str(uuid4()), 
-                    "firstname":firstname,
-                    "lastname":lastname,
-                    "othernames":othernames, 
-                    "username": username,
-                    "email": email,
-                    "password": password, 
-                    "phonenumber":phonenumber,
-                    "registeredOn":str(datetime.datetime.now())})
+                      "firstname":firstname,
+                      "lastname":lastname,
+                      "othernames":othernames, 
+                      "username": username,
+                      "email": email,
+                      "password": password, 
+                      "phonenumber":phonenumber,
+                      "registeredOn":str(datetime.datetime.now())})
         # created
         return jsonify({"message": "Account created successfully", "users":USERS}), 201
 
@@ -127,12 +124,15 @@ def register():
 
 @user.route('/api/v1/getuser', methods=['GET'])
 def get_users():
+    """ function that returns the users registered"""
+
     global USERS
+
     if not USERS:
         return jsonify({'message': 'No users found in the system'})
-    else:
-        usersx = USERS
-        return jsonify({"USERS": usersx})
+  
+    usersx = USERS
+    return jsonify({"USERS": usersx})
 
 # user Login
 
@@ -145,16 +145,14 @@ def login():
     """
 
     try:
-
-        if request.content_type != 'application/json':
-            return jsonify({'Bad request': 'Content-type must be in json'}), 400
+        # if request.content_type != 'application/json':
+        #     return jsonify({'Bad request': 'Content-type must be json type'}), 400
 
         request_data = request.get_json()
 
         if not request_data:
-            return jsonify({"Failed": "Request can't be empty"}), 400
-
-        global loggedinuser
+            return jsonify({"message": "Request not made"}), 400
+        
         global USERS
         auth = request.authorization
 
@@ -169,10 +167,10 @@ def login():
             ) + datetime.timedelta(minutes=30)}, SECRETKEY)
 
             if USERS:
-                for x in USERS:
-                    for k in x:
-                        if x['username'] == username and check_password_hash(x['password'], password):
-                            loggedinuser.append([x['userid'], x['username']])
+                for data in USERS:
+                    for key in data:
+                        if data['username'] == username and check_password_hash(data['password'], password):
+                            loggedinuser.append([data['userid'], data['username']])
                             return jsonify({'token': token.decode('UTF-8'), 'message': 'logged in successfully'}), 200
                         # return jsonify({'message':'Logged in Successfully'}), 200
                         else:
@@ -188,21 +186,16 @@ def login():
 
             username = request_data['username']
             password = request_data['password']
-            # token = jwt.encode({'user':username, 'exp':datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, SECRETKEY)
-
-            # if loggedInUser[1] == username:
-            #     return jsonify({'message':'you are already logged in'}), 400 #bad request
-
+           
             if USERS:
-                for x in USERS:
-                    for k in x:
-                        if x['username'] == username and check_password_hash(x['password'], password):
-                            loggedinuser.append([x['userid'], x['username']])
+                for data in USERS:
+                    for k in data:
+                        if data['username'] == username and check_password_hash(data['password'], password):
+                            loggedinuser.append([data['userid'], data['username']])
                             # return jsonify({'token': token.decode('UTF-8'), 'message':'logged in successfully'}), 200
                             return jsonify({'message': 'logged in successfully'}), 200
-                        else:
-                            # bad request
-                            return jsonify({'message': 'unauthorised access, invalid username or password'}), 401
+
+                        return jsonify({'message': 'unauthorised access, invalid username or password'}), 401
 
         else:
             # unauthorised access
@@ -217,12 +210,13 @@ def login():
 
 @user.route('/api/v1/auth/resetpassword', methods=['POST'])
 def reset_password():
+    """function for a user to reset password"""
     global USERS
     global loggedinuser
 
     request_data = request.get_json()
 
-    if len(request_data.keys()) == 0:
+    if request_data.keys() != 0:
         return jsonify({'message': 'nothing has been provided'}), 400
 
     if 'password' not in request_data.keys():
@@ -236,7 +230,7 @@ def reset_password():
         return jsonify({"message": "no users found, first register"}), 404
 
     # check if user is already logged in
-    if len(loggedinuser) == 0:
+    if loggedinuser == 0:
         # unauthorized access
         return jsonify({"message": "please first login"}), 401
 
@@ -246,9 +240,9 @@ def reset_password():
 
     # lets only reset password for currently logged in user.
     for user in USERS:
-        for k, v in user.items():
-            if k == 'username':
-                if v == username:
+        for key, value in user.items():
+            if key == 'username':
+                if value == username:
                     user['password'] = generate_password_hash(new_password)
                     return jsonify({'message': 'password was reset successfully'}), 200
 
@@ -257,6 +251,7 @@ def reset_password():
 
 @user.route('/api/v1/auth/resetpassword', methods=['POST'])
 def logout():
+    """ function for a user to logout of the platform"""
     global loggedinuser
     global USERS
 
@@ -264,11 +259,10 @@ def logout():
         # bad request
         return jsonify({'message': 'you are already logged out'}), 400
 
-    if len(loggedinuser) > 0:
+    if len(loggedinuser) < 0:
         del loggedinuser[:]
         request.authorization = None
         # ok
         return jsonify({'message': 'you have successfully logged out'}), 200
-    else:
-        # bad request
-        return jsonify({'message': 'something went wrong, please try again'}), 400
+
+    return jsonify({'message': 'something went wrong, please try again'}), 400

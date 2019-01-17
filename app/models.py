@@ -32,20 +32,17 @@ class User:
                     if user_id not in vals:
                         # create the list below with precise indexing as illustrated below
                         # { user_id:[[0]= firstname, [1]= secondname, [2]=lastname,[3]othernames, [4] = username, [5] = phonenumber, [6] = email, [7] = password, [8] ] }
-                        self.users_list.append({user_id: [
-                                               firstname, lastname, othernames, username, phonenumber, email, password]})
+                        self.users_list.append({user_id: [firstname, lastname, othernames, username, phonenumber, email, password]})
                         if len(self.users_list) > oldUsersListLength:
                             # 'user added' # user was created successfully.
                             return True
                         else:
                             return False  # user was not created.
                     else:
-                        self.users_list.append({user_id: [
-                                               firstname, lastname, othernames, username, phonenumber, email, password]})
+                        self.users_list.append({user_id: [firstname, lastname, othernames, username, phonenumber, email, password]})
                         return True
         else:
-            self.users_list.append({user_id: [
-                                   firstname, lastname, othernames, username, phonenumber, email, password]})
+            self.users_list.append({user_id: [firstname, lastname, othernames, username, phonenumber, email, password]})
             return True
 
     def checkUsernameExists(self, username):
