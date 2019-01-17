@@ -58,7 +58,8 @@ test_filename
 
 | URL Endpoint | HTTP Methods | Summary |
 | -------- | ------------- | --------- |
-| `api/v1/redflag/<flag_id>` | `GET` | Retrieves a specific redflag by id 
+| `api/v1/redflag/<flag_id>` | `GET` | Retrieves a specific redflag by id
+|`api/v1/redflag/create_redflag`|`POST`| creates redflag
 | `/api/v1/redflag'` | `GET` | Gets all the red flags created by the users
 | `api/v1/getuser` | `GET` | Retrieve all users |
 | `api/v1/auth/register | `POST` |  registers a new User |
