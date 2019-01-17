@@ -30,19 +30,19 @@ Then when the virtual environmemt is created, Activate the environment
  In your Vscode you therefore get to realise its in brackets eg (venv)nataline.......... and when all this is done get to your application directorty if already pushed to github by cloning the repo 
  
  ```
- git clone https://github.com/natalie-abbie/iReport.git 
- cd to the application directory eg cd iReport
+ git clone https://github.com/natalie-abbie/i-report.git 
+ cd to the application directory eg cd i-report
  incase its in the branch git checkout branchname
  ```
  After all the dependences are installed in your virtualenv therefore run the command to put the depences in the in the requirements.txt file 
  ```
- pip install >requirements.txt 
+ pip install >Requirements.txt 
  and to install the dependences again run the below command in your terminal to install all the dependences
- pip install -r rewuirements.txt
+ pip install -r Requirements.txt
  ```
  Run the application with:
  ```
- python app/app.py
+ python run.py
  ```
 
 ## Running the tests
@@ -60,9 +60,9 @@ test_filename
 | -------- | ------------- | --------- |
 | `api/v1/redflag/<flag_id>` | `GET` | Retrieves a specific redflag by id 
 | `/api/v1/redflag'` | `GET` | Gets all the red flags created by the users
-| `api/v1/users` | `GET` | Retrieve all users |
-| `api/v1/register | `POST` |  registers a new User |
-| `api/v1/login` | `POST` |  Logs in a registered user |
+| `api/v1/getuser` | `GET` | Retrieve all users |
+| `api/v1/auth/register | `POST` |  registers a new User |
+| `api/v1/auth/login` | `POST` |  Logs in a registered user |
 | `api/v1/redflag/<flag_id>/location`|`PUT`| Changes the location of a specific  user
 | `api/v1/redflag/<flag_id>/description` | `PUT` | changes the description of a specific user |
 | `api/v1/redflag/<flag_id>`|`DELETE`| deletes the red of a specific user|
