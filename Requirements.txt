@@ -6,7 +6,6 @@ attrs==18.2.0
 cffi==1.11.5
 chardet==3.0.4
 colorama==0.3.9
-cryptography==1.7.2
 flasgger==0.8.1
 Click==7.0
 cryptography==2.4.2
@@ -21,7 +20,6 @@ ipaddress==1.0.17
 idna==2.8
 itsdangerous==1.1.0
 Jinja2==2.10
-jwt==0.5.2
 keyring==10.6.0
 keyrings.alt==3.0
 jwt==0.5.4
@@ -35,8 +33,6 @@ passlib==1.7.1
 pathlib2==2.3.3
 pbr==4.3.0
 pep8==1.7.1
-psycopg2==2.7.5
-psycopg2-binary==2.7.5
 pyasn1==0.4.5
 pycodestyle==2.4.0
 more-itertools==5.0.0
