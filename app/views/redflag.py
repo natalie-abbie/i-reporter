@@ -1,7 +1,9 @@
 """ endpoints for redflag operations"""
+import datetime
 from uuid import uuid4
 from flask import Blueprint, jsonify, request
 from .users import loggedinuser
+from app.models import FLAGS, Redflag
 
 flags = Blueprint('flag', __name__)
 
@@ -33,22 +35,31 @@ def create_redflag():
             return jsonify({'message': 'location is missing'}), 400
         location = request_data['location']
 
-        if 'description' not in request_data.keys():
+        if 'comment' not in request_data.keys():
             # bad request
-            return jsonify({'message': 'description is missing'}), 400
-        if len(request_data['description']) < 20:
+            return jsonify({'message': 'comment is missing'}), 400
+        if len(request_data['comment']) < 20:
             # bad request
-            return jsonify({'message': 'description should be well defined'}), 400
-        description = request_data['description']  
+            return jsonify({'message': 'comment should be well defined'}), 400
+        comment = request_data['comment']  
+
+        if 'media' not in request_data.keys():
+            # bad request
+            return jsonify({'message': 'media is missing'}), 400
+        # if request_data['media'] != mp3 and request_data['media'] != mp4:
+        #     return jsonify({'message':'media format not supported'}),400
+        media = request_data['media']
 
         data = {
             "flag_id": str(uuid4()),
             "type":type,
             "location":location,
-            "description":description
+            "comment":comment,
+            "media": media,
+            "createdOn":str(datetime.datetime.now())
         }
         loggedinuser.append(data)
-        return jsonify({'message':'flag successfully created', 'flags':loggedinuser}), 201
+        return jsonify({'message':'flag successfully created', 'flags-posted':loggedinuser}), 201
 
     except KeyError as item:
         return jsonify({'message': str(item) + 'missing'}), 400
@@ -68,40 +79,24 @@ def get():
         return jsonify({'message': 'you are not logged in, please login or create account'}), 401
 
     if not loggedinuser:
-        return jsonify({'message': 'No records found', 'flags':FLAGS}), 404  # not found
+        return jsonify({'message': 'No records found'}), 404  # not found
     
     return jsonify({'flags': loggedinuser}), 200
 
-@flags.route('/api/v1/redflag/<flag_id>', methods=['GET'])
+@flags.route('/api/v1/redflag/<string:flag_id>', methods=['GET'])
 def get_specific_flag(flag_id):
     """ function to retrieve a single flag by id"""
-    global loggedinuser
+    global loggedinuser   
 
-    for data in loggedinuser:
-        if flag_id == flag_id:
-            return jsonify({'flag': loggedinuser}), 200  # ok
+    if not loggedinuser:
+        return jsonify({'message':'no records of any flag exist.'}), 404 #not found
+    else:
+        result = Redflag.get_one_flag(flag_id)
+        if result or result == 0:
+            return jsonify({'flags2':loggedinuser[result]}), 200 #ok
     
-        return jsonify({'flag': 'no records of that flag exist'}), 400
-
-
-@flags.route("/api/v1/redflag/<flag_id>/update", methods=['PATCH'])
-def update(flag_id):
-    """Function to update flag using the id passed from parameter"""
-    global FLAGS
-    global loggedinuser
-
-    if len(loggedinuser) == 0:
-        # anauthorized access
-        return jsonify({'message': 'you are logged out, please login'}), 401
-
-    for data in loggedinuser:
-        if flag_id == flag_id:
-            data[2] = request.get_json()
-            return jsonify({"message":"redflag updated", "update":FLAGS}), 200   
-        else:
-            # not found
-            return jsonify({'message': 'no records of that flag exist'}), 404
-
+        return jsonify({'flag':loggedinuser[1]}), 400 #bad request
+    
 @flags.route("/api/v1/redflag/<flag_id>", methods=['DELETE'])
 def delete_flag(flag_id):
     """Function is responsible for deleting a flag on parameter passed as id"""
@@ -109,7 +104,7 @@ def delete_flag(flag_id):
 
     for data in loggedinuser:
         if flag_id == flag_id: 
-            loggedinuser.remove(data)            
+            loggedinuser.remove(data)          
             return jsonify({'message': 'flag has been successfully deleted'}), 200
       
         return jsonify({'message': 'No flag has that id, nothing was deleted'}), 400
