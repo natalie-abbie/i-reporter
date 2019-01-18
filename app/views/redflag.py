@@ -79,20 +79,49 @@ def get():
 def get_specific_flag(flag_id):
     """ function to retrieve a single flag by id""" 
 
+    if len(loggedinuser) == 0:
+        # anauthorized access
+        return jsonify({'message': 'you are not logged in, please login or create account'}), 401
+
     if not redflag_list:
         return jsonify({'message':'no records of any flag exist.'}), 404 #not found
     for data in redflag_list:
         if flag_id == data['flag_id']:
             return jsonify({'flags':data}), 200 #ok
     
-        return jsonify({'message':'no flag of that exists'}), 400 #bad request
+    return jsonify({'message':'no flag of that exists'}), 400 #bad request
     
 @flags.route("/api/v1/redflag/<flag_id>", methods=['DELETE'])
 def delete_flag(flag_id):
     """Function is responsible for deleting a flag on parameter passed as id"""
-
-    for data in loggedinuser:
-        if flag_id == flag_id: 
-            loggedinuser.remove(data)          
+    if len(loggedinuser) == 0:
+        # anauthorized access
+        return jsonify({'message': 'you are not logged in, please login or create account'}), 401
+    for data in redflag_list:
+        if flag_id == data['flag_id']: 
+            redflag_list.remove(data)          
             return jsonify({'message': 'flag has been successfully deleted'}), 200      
-        return jsonify({'message': 'No flag has that id, nothing was deleted'}), 400
+    return jsonify({'message': 'No flag has that id, nothing was deleted'}), 400
+
+@flags.route("/api/v1/redflag/<int:flag_id>/location", methods=['PATCH'])
+def update(flag_id):
+    """Function is responsible for deleting a flag on parameter passed as id"""
+    if len(loggedinuser) == 0:
+        # anauthorized access
+        return jsonify({'message': 'you are not logged in, please login or create account'}), 401
+    for data in redflag_list:
+        if flag_id == flag_id:
+            data['location'] = request.get_json()
+            return jsonify({"message":"redflag updated","updated_list":data})
+    return jsonify({'message': 'No flag has that id, nothing was update'}), 400
+
+@flags.route("/api/v1/redflag/<int:flag_id>/description", methods=['PATCH'])
+def update1(flag_id):
+    if len(loggedinuser) == 0:
+        # anauthorized access
+        return jsonify({'message': 'you are not logged in, please login or create account'}), 401
+    for data in redflag_list:
+        if flag_id == flag_id:
+            data['description'] = request.get_json()
+            return jsonify({"message":"description updated","updated_list":data})     
+    return jsonify({'message': 'No flag has that id, nothing was update'}), 400

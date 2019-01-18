@@ -83,7 +83,6 @@ class Redflag:
 
     def create_redflag(self):
         """ posting a redflag. funtion returns true if the redflag has been created and false if redflag is not created."""
-        global FLAGS
         result = False
         # length of redflag list before manipulation.
         oldflagListLength = len(FLAGS)
@@ -99,55 +98,3 @@ class Redflag:
             result = False  # incase creating a redflag fails return False.
         return result
 
-    # @staticmethod
-    # def get_one_flag(flag_id):
-    #     """function to check whether a business Exists or not. function return a boolean true if business exists and
-    #     false if it does not exist."""
-    #     index = None
-    #     from app.views.users import loggedinuser
-    #     global loggedinuser
-    #     if loggedinuser:
-    #             for value in loggedinuser:
-    #                 if value == flag_id:
-    #                     return loggedinuser
-    #     else:
-    #         return loggedinuser
-
-    @staticmethod
-    def update_flag(flag_id):
-        """updating flag details. returns a index to update"""
-        index = None
-        global FLAGS
-        redflag = []
-        if FLAGS:
-            for num, value in enumerate(FLAGS, 0):
-                for key, val in value.items():
-                    if key == flag_id:
-                        index = num
-                        redflag.append([index, val])
-                        # FLAGS[index]={flag_id:[type,user_id,comment,email,location,createdOn,createdby]}
-                        return redflag
-        else:
-            return redflag
-
-    @staticmethod
-    def delete_flag(flag_id):
-        """ deleting a flag"""
-        global loggedinuser
-        index = None
-        if FLAGS:
-            for num, value in enumerate(FLAGS, 0):
-                for key in value.items():
-                    if key == flag_id:
-                        index = num
-                        return index
-        else:
-            return index
-
-    # def get_all_flags(self):
-    #     """returns a list of all flags registered."""
-    #     global FLAGS
-    #     if FLAGS:
-    #         return FLAGS
-
-    #     return None

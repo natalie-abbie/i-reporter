@@ -293,17 +293,14 @@ class TestRedflag(unittest.TestCase):
         data = json.loads(response.data)
         self.assertEqual('comment is missing', data['message'])
         self.assertEqual(400, response.status_code)
-    
-    
 
-
-    # def test_delete_flag_failed(self):
-    #     response = self.app.delete(
-    #         '/api/v1/redflag/<flag_id>', content_type='application/json')
-    #     data = json.loads(response.data)
-    #     self.assertEqual(
-    #         'No flag has that id, nothing was deleted', data['message'])
-    #     self.assertEqual(400, response.status_code)
+    def test_delete_flag_failed(self):
+        response = self.app.delete(
+            '/api/v1/redflag/<flag_id>', content_type='application/json')
+        data = json.loads(response.data)
+        self.assertEqual(
+            'No flag has that id, nothing was deleted', data['message'])
+        self.assertEqual(400, response.status_code)
 
     # def test_update_flag_successful(self):
     #     response = self.app.put('api/v1/redflag/<flag_id>', content_type='application/json',
