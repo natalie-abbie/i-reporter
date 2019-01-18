@@ -4,7 +4,7 @@ python:
     - "3.6"
 install:
   - pip install -r Requirements.txt
-  -pi install coverage
+  - pip install coverage
 
 script:
   -  python -m pytest --cov
