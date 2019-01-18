@@ -19,6 +19,26 @@ body.action-open {
   overflow: hidden;
 }
 
+/* .background-img {
+  background-image: linear-gradient(to right, #be1417, #e6acad);
+  background-image: url(../img/index4.jpg);
+  height: 400px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-size: 40%;
+} */
+
+/* .containerimage {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  background: honeydew;
+} */
+
+
 /* form*/
 a {
   text-decoration: none;
@@ -214,6 +234,7 @@ header {
 
 .homepage-paragraph {
   font-size: 1.5em;
+  font-family:roboto;
 }
 
 .homepage-cta {
@@ -234,6 +255,10 @@ section > .btn {
   align-self: center;
 }
 
+.background-image{
+  width:40%;
+  border-radius:60px;
+}
 /* end of homepage */
 
 /* images */
@@ -244,18 +269,24 @@ img{
 
 
 /* Footer */
-footer {
+footer{
   display: flex;
-  padding: 20px;
-  justify-content: center;
-  background-color: blue;
+  align-items: center;
+  background: rgb(86, 124, 252);
+  color:white;
+  /* flex-shrink: 0; */
 }
-
-.footer-edit {
-  font-weight: 50%;
+.central-footer{
+  flex: 1;
+  text-align: center;
   color:white;
 }
-
+.side-footer{
+  flex:initial; /* Make side footers fixed */
+  width: 300px;
+  padding: 2rem;
+  font-size: 0.9rem;
+}
 
 
 /* actions */
@@ -381,8 +412,8 @@ tr{
 
 .user-profile  .username {
   margin: auto;
-  margin-top: -4.40em;
-  margin-left: 5.80em;
+  margin-top: -6.40em;
+  margin-left:50%;
   color: #658585;
   font-size: 1.53em;
   font-family: "Coda", sans-serif;
@@ -391,43 +422,47 @@ tr{
 .user-profile  .bio {
   margin: auto;
   display: inline-block;
-  margin-left: 10.43em;
+  margin-left: 50%;
   color: #e76043; 
-  font-size: .87em;
+  font-size: .89em;
   font-family: "varela round", sans-serif;
 }
 .user-profile > .description {
   margin: auto;
   margin-top: 1.35em;
-  margin-right: 4.43em;
+  margin-left: 50%;
   width: 14em;
-  color: #c0c5c5; 
+  color: grey; 
   font-size: .87em;
   font-family: "varela round", sans-serif;
 }
-.user-profile > img.avatar {
+ .avatar {
 	padding: .7em;
-  margin-left: .3em;
-  margin-top: .3em;
-  height: 6.23em;
-  width: 6.23em;
-  border-radius: 18em;
+  height: 100%;
+  width:40%;
+  float:center;
+  border-radius:30%;
+  /* border-radius: 18em; */
 }
 
+.details{
+  text-align:center;
+}
 .user-profile ul.data {
+  margin-top:50%;
 	margin: 2em auto;
 	height: 3.70em;
-  background: #4eb6b6;
+  background:lightblue;
   text-align: center;
   border-radius: 0 0 .3em .3em;
 }
-.user-profile li {
+/* .user-profile li {
 	margin: 0 auto;
   padding: 1.30em; 
   width: 33.33334%;
   display: table-cell;
   text-align: center;
-}
+} */
 
 .user-profile span {
 	font-family: "varela round", sans-serif;
@@ -435,6 +470,7 @@ tr{
   white-space: nowrap;
   font-size: 1.27em;
   font-weight: bold;
+  line-height:9;
 }
 .user-profile span:hover {
   color: #daebea;
@@ -443,16 +479,51 @@ tr{
 .vote > h1 {
   display: block;
   text-align: center;
-  clear: both;
   font-family: "Coda", sans-serif;
   color: #343f3d;
-  line-height: 6;
+  line-height: 10;
   font-size: 1.6em;
 }
 .vote > h1 a {
   text-decoration: none;
   color: #ea4c89;
 }
+
+/*  */
+.list-group-container {
+  width: auto; 
+  margin-left: 200px;
+  margin-right: 200px;
+  box-shadow: 1px 2px 5px 3px;
+  background-color: blue;
+}
+
+.list-group {
+  display: -ms-flexbox;
+  display: flex; 
+  -ms-flex-direction: column;
+  flex-direction: column; 
+  padding-left: 0;
+  margin-bottom: 0;
+  background-color:white;
+  /* float:left; */
+}
+
+.list-group-item {
+  text-align:center;
+  position: relative;
+  display: block;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 15px;
+  background-color: lightblue;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+/* / */ 
+
+.act{
+  width:30%;
+}
+/*  */
 
 /* For smartphones (<768px) */
 @media screen and (max-width: 768px) {
