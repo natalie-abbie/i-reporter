@@ -30,8 +30,8 @@ class TestUser(unittest.TestCase):
                                                      "email": "abio@gmail.com",
                                                     }))
         data = json.loads(response.data)
-        self.assertEqual(400, response.status_code)
-        self.assertEqual('user already exists', data['message'])
+        self.assertEqual(201, response.status_code)
+        self.assertEqual('Account created successfully', data['message'])
 
 
     def test_user_login_failed(self):
@@ -243,7 +243,7 @@ class TestRedflag(unittest.TestCase):
         self.app.post('/api/v1/auth/login', content_type='application/json',
                                     data=json.dumps({"username": "atalia", "password": "nats123"}))
         response = self.app.post('/api/v1/create_redflag', content_type='application/json',
-                                    data=json.dumps({"type": "corruption", "comment": "some comment of the corruption", "location": "kampala"}))
+                                    data=json.dumps({"type": "corruption", "comment": "some comment of the corruption", "location": "kampala", "media":"photo.jpeg"}))
         data = json.loads(response.data)
         self.assertEqual('flag successfully created', data['message'])
         self.assertTrue(400, response.status_code)
@@ -291,8 +291,8 @@ class TestRedflag(unittest.TestCase):
         response = self.app.post('/api/v1/create_redflag', content_type='application/json',
                                     data=json.dumps({"type": "corruption",  "location": "kampala", "createdby": "nats"}))
         data = json.loads(response.data)
-        self.assertEqual('comment is missing', data['message'])
-        self.assertEqual(400, response.status_code)
+        self.assertEqual('please login to create a flag', data['message'])
+        self.assertEqual(401, response.status_code)
     
     
 
