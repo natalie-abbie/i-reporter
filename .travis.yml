@@ -4,9 +4,10 @@ python:
     - "3.6"
 install:
   - pip install -r Requirements.txt
+  -pi install coverage
 
 script:
-  -  coverage run pytest
+  -  python -m pytest --cov
   
 after_success: 
 - coveralls
