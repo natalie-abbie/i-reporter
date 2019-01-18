@@ -243,13 +243,13 @@ class TestRedflag(unittest.TestCase):
         self.app.post('/api/v1/auth/login', content_type='application/json',
                                     data=json.dumps({"username": "atalia", "password": "nats123"}))
         response = self.app.post('/api/v1/create_redflag', content_type='application/json',
-                                    data=json.dumps({"type": "corruption", "description": "some description of the corruption", "location": "kampala"}))
+                                    data=json.dumps({"type": "corruption", "comment": "some comment of the corruption", "location": "kampala"}))
         data = json.loads(response.data)
         self.assertEqual('flag successfully created', data['message'])
         self.assertTrue(400, response.status_code)
 
 
-    def test_short_description_create_redflag(self):
+    def test_short_comment_create_redflag(self):
         user= {"firstname":"abio",
                 "lastname": "natalie",
                 "othernames": "talie",
@@ -263,21 +263,21 @@ class TestRedflag(unittest.TestCase):
         self.app.post('/api/v1/auth/login', content_type='application/json',
                                     data=json.dumps({"username": "atalia", "password": "nats123"}))
         response = self.app.post('/api/v1/create_redflag', content_type='application/json',
-                                    data=json.dumps({"type": "corruption", "description": "some des", "location": "kampala"}))
+                                    data=json.dumps({"type": "corruption", "comment": "some des", "location": "kampala"}))
         data = json.loads(response.data)
-        self.assertEqual('description should be well defined', data['message'])
+        self.assertEqual('comment should be well defined', data['message'])
         self.assertEqual(400, response.status_code)
 
     def test_type_missing_create_redflag(self):
         response = self.app.post('/api/v1/create_redflag', content_type='application/json',
-                                    data=json.dumps({"description": "some description of the corruption", "email": "abionatline@gmail.com", "location": "kampala", "createdby": "nats"}))
+                                    data=json.dumps({"comment": "some comment of the corruption", "email": "abionatline@gmail.com", "location": "kampala", "createdby": "nats"}))
         data = json.loads(response.data)
         self.assertEqual('Flag type is missing', data['message'])
         self.assertEqual(400, response.status_code)
 
     def test_location_missing_create_redflag(self):
         response = self.app.post('/api/v1/create_redflag', content_type='application/json',
-                                    data=json.dumps({"type": "corruption", "description": "some description of the corruption", "email": "abionatline@gmail.com", "createdby": "nats"}))
+                                    data=json.dumps({"type": "corruption", "comment": "some comment of the corruption", "email": "abionatline@gmail.com", "createdby": "nats"}))
         data = json.loads(response.data)
         self.assertEqual('location is missing', data['message'])
         self.assertEqual(400, response.status_code)
@@ -287,11 +287,11 @@ class TestRedflag(unittest.TestCase):
                          data=json.dumps({"firstname": "abio", "lastname": "nataline", "othername": "nats", "username": "talie", "password": "somepassword", "email": "abionatline@gmail.com", "phonenumber": "0752030815"}))
 
 
-    def test_description_missing_create_redflag(self):
+    def test_comment_missing_create_redflag(self):
         response = self.app.post('/api/v1/create_redflag', content_type='application/json',
                                     data=json.dumps({"type": "corruption",  "location": "kampala", "createdby": "nats"}))
         data = json.loads(response.data)
-        self.assertEqual('description is missing', data['message'])
+        self.assertEqual('comment is missing', data['message'])
         self.assertEqual(400, response.status_code)
     
     
@@ -307,7 +307,7 @@ class TestRedflag(unittest.TestCase):
 
     # def test_update_flag_successful(self):
     #     response = self.app.put('api/v1/redflag/<flag_id>', content_type='application/json',
-    #                                data=json.dumps({'name': 'flagdemo', 'location': '', 'description': ''}))
+    #                                data=json.dumps({'name': 'flagdemo', 'location': '', 'comment': ''}))
 
     #     data = json.loads(response.data)
     #     self.assertEqual('no records of that flag exist', data['message'])
