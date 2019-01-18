@@ -38,18 +38,17 @@ class User:
                         if len(self.users_list) > oldeusers:
                             # 'user added' # user was created successfully.
                             return True
-                        else:
-                            return False  # user was not created.
+                        return False  # user was not created.
                     else:
                         self.users_list.append(
                             {user_id: [firstname, lastname, othernames, username, phonenumber, email, password]})
                         return True
-        else:
-            self.users_list.append(
-                {user_id: [firstname, lastname, othernames, username, phonenumber, email, password]})
-            return True
+        
+        self.users_list.append(
+            {user_id: [firstname, lastname, othernames, username, phonenumber, email, password]})
+        return True
 
-    def checkUsernameExists(self, username):
+    def UsernameExists(self, username):
         """checks whether username Exists before registering a new user and returns
         a boolean true if the username already exists and false if the username is not yet used."""
         # lets loop through this global users_list and append all usernames to list availUsernames
@@ -71,12 +70,14 @@ class User:
 class Redflag:
     """class for creating a redflag post """
 
-    def __init__(self, flag_id, type, comment, location, media):
+    def __init__(self, flag_id, type, comment, location, media,createdBy,status):
         self.flag_id = flag_id
         self.type = type
         self.comment = comment
         self.location = location
         self.media = media
+        self.createdBy = createdBy
+        self.status = status
         self.createdOn = datetime.datetime.now()
         self.redflag_list = []
 
@@ -98,38 +99,36 @@ class Redflag:
             result = False  # incase creating a redflag fails return False.
         return result
 
-    @staticmethod
-    def get_one_flag(flag_id):
-        """function to check whether a business Exists or not. function return a boolean true if business exists and
-        false if it does not exist."""
-        index = None
-        from views.users import loggedinuser
-        global loggedinuser
-        if loggedinuser:
-            for x, y in enumerate(FLAGS, 0):
-                for key, val in y.items():
-                    if key == flag_id:
-                        index = x
-                        return index
-        else:
-            return index
-
     # @staticmethod
-    # def update_flag(flag_id):
-    #     """updating flag details. returns a index to update"""
+    # def get_one_flag(flag_id):
+    #     """function to check whether a business Exists or not. function return a boolean true if business exists and
+    #     false if it does not exist."""
     #     index = None
-    #     global FLAGS
-    #     redflag = []
-    #     if FLAGS:
-    #         for num, value in enumerate(FLAGS, 0):
-    #             for key, val in value.items():
-    #                 if key == flag_id:
-    #                     index = num
-    #                     redflag.append([index, val])
-    #                     # FLAGS[index]={flag_id:[type,user_id,comment,email,location,createdOn,createdby]}
-    #                     return redflag
+    #     from app.views.users import loggedinuser
+    #     global loggedinuser
+    #     if loggedinuser:
+    #             for value in loggedinuser:
+    #                 if value == flag_id:
+    #                     return loggedinuser
     #     else:
-    #         return redflag
+    #         return loggedinuser
+
+    @staticmethod
+    def update_flag(flag_id):
+        """updating flag details. returns a index to update"""
+        index = None
+        global FLAGS
+        redflag = []
+        if FLAGS:
+            for num, value in enumerate(FLAGS, 0):
+                for key, val in value.items():
+                    if key == flag_id:
+                        index = num
+                        redflag.append([index, val])
+                        # FLAGS[index]={flag_id:[type,user_id,comment,email,location,createdOn,createdby]}
+                        return redflag
+        else:
+            return redflag
 
     @staticmethod
     def delete_flag(flag_id):

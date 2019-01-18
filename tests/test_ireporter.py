@@ -291,8 +291,8 @@ class TestRedflag(unittest.TestCase):
         response = self.app.post('/api/v1/create_redflag', content_type='application/json',
                                     data=json.dumps({"type": "corruption",  "location": "kampala", "createdby": "nats"}))
         data = json.loads(response.data)
-        self.assertEqual('please login to create a flag', data['message'])
-        self.assertEqual(401, response.status_code)
+        self.assertEqual('comment is missing', data['message'])
+        self.assertEqual(400, response.status_code)
     
     
 
